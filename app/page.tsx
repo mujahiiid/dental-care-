@@ -5,12 +5,18 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const services = [
-  { number: "01", title: "تجميل الابتسامة", description: "خطة تجميل متوازنة تحافظ على طبيعة ملامحك وتمنحك ابتسامة تشبهك.", icon: "sparkle", accent: "mint" },
-  { number: "02", title: "زراعة الأسنان", description: "حلول مدروسة لاستعادة الثبات والراحة والمظهر الطبيعي بثقة.", icon: "implant", accent: "navy" },
-  { number: "03", title: "التقويم الشفاف", description: "رحلة تقويم مرنة ومريحة، مصممة لتناسب يومك دون أن تعطل أسلوب حياتك.", icon: "align", accent: "sand" },
-  { number: "04", title: "علاج الجذور", description: "علاج دقيق يركز على إزالة الألم والحفاظ على الأسنان الطبيعية لأطول وقت.", icon: "root", accent: "sky" },
-  { number: "05", title: "أسنان الأطفال", description: "زيارة هادئة ولطيفة تبني علاقة إيجابية بين طفلك والعناية بالأسنان.", icon: "heart", accent: "rose" },
-  { number: "06", title: "العناية الوقائية", description: "فحص وتنظيف دوري يساعدانك على حماية ابتسامتك قبل ظهور المشكلات.", icon: "shield", accent: "mint" },
+  { number: "01", title: "تجميل الابتسامة", label: "SMILE DESIGN", description: "خطة تجميل متوازنة تحافظ على طبيعة ملامحك وتمنحك ابتسامة تشبهك.", icon: "sparkle", image: "service-shot-6" },
+  { number: "02", title: "زراعة الأسنان", label: "DENTAL IMPLANTS", description: "حلول مدروسة لاستعادة الثبات والراحة والمظهر الطبيعي بثقة.", icon: "implant", image: "service-shot-2" },
+  { number: "03", title: "التقويم الشفاف", label: "CLEAR ALIGNERS", description: "رحلة تقويم مرنة ومريحة، مصممة لتناسب يومك دون أن تعطل أسلوب حياتك.", icon: "align", image: "service-shot-3" },
+  { number: "04", title: "علاج الجذور", label: "ROOT CANAL", description: "علاج دقيق يركز على إزالة الألم والحفاظ على الأسنان الطبيعية لأطول وقت.", icon: "root", image: "service-shot-5" },
+  { number: "05", title: "أسنان الأطفال", label: "PEDIATRIC DENTISTRY", description: "زيارة هادئة ولطيفة تبني علاقة إيجابية بين طفلك والعناية بالأسنان.", icon: "heart", image: "service-shot-4" },
+  { number: "06", title: "العناية الوقائية", label: "PREVENTIVE CARE", description: "فحص وتنظيف دوري يساعدانك على حماية ابتسامتك قبل ظهور المشكلات.", icon: "shield", image: "service-shot-1" },
+];
+
+const teamExpertise = [
+  { title: "تجميل وزراعة الأسنان", description: "رؤية تجميلية تحافظ على النتيجة الطبيعية وتوازن ملامح الوجه.", image: "team-shot-1" },
+  { title: "التقويم وعلاج الجذور", description: "تخطيط دقيق للحركة والعلاج مع اهتمام مستمر براحة المريض.", image: "team-shot-2" },
+  { title: "أسنان الأطفال والوقاية", description: "تجربة هادئة تبني الثقة وتحافظ على صحة الابتسامة من البداية.", image: "team-shot-3" },
 ];
 
 const faqs = [
@@ -61,6 +67,7 @@ export default function Home() {
         <nav className={`main-nav${menuOpen ? " is-open" : ""}`} aria-label="التنقل الرئيسي">
           <a href="#about" onClick={() => setMenuOpen(false)}>عن العيادة</a>
           <a href="#services" onClick={() => setMenuOpen(false)}>الخدمات</a>
+          <a href="#team" onClick={() => setMenuOpen(false)}>الفريق</a>
           <a href="#experience" onClick={() => setMenuOpen(false)}>تجربتك</a>
           <a href="#faq" onClick={() => setMenuOpen(false)}>الأسئلة</a>
           <Link className="mobile-book" href="/booking" onClick={() => setMenuOpen(false)}>احجز استشارتك</Link>
@@ -115,12 +122,20 @@ export default function Home() {
       <section className="services section" id="services">
         <div className="services-head"><div><div className="section-kicker light"><span>02</span>الخدمات</div><h2>كل ما تحتاجه ابتسامتك<br /><em>في مكان واحد.</em></h2></div><p>من الوقاية وحتى استعادة الابتسامة، نرتب لك رحلة متكاملة حول احتياجك الحقيقي.</p></div>
         <div className="services-grid">
-          {services.map((service) => <article className={`service-card ${service.accent}`} key={service.title}><div className="service-top"><span className="service-icon"><Icon name={service.icon} /></span><span className="service-number">{service.number}</span></div><h3>{service.title}</h3><p>{service.description}</p><Link href="/booking" aria-label={`احجز استشارة ${service.title}`}>احجز الخدمة <span>←</span></Link></article>)}
+          {services.map((service) => <article className="service-card" key={service.title}><div className={`service-image ${service.image}`} role="img" aria-label={`صورة توضيحية لخدمة ${service.title}`}><span className="service-icon"><Icon name={service.icon} /></span><span className="service-number">{service.number}</span></div><div className="service-body"><small>{service.label}</small><h3>{service.title}</h3><p>{service.description}</p><Link href="/booking" aria-label={`احجز استشارة ${service.title}`}>احجز الخدمة <span>←</span></Link></div></article>)}
         </div>
       </section>
 
+      <section className="team section" id="team">
+        <div className="team-head"><div><div className="section-kicker light"><span>03</span>خبرات متكاملة</div><h2>فريق يرى الصورة كاملة،<br /><em>مش سنًا منفردًا.</em></h2></div><p>كل تخصص يكمل الآخر، عشان تكون الخطة أوضح والنتيجة أكثر اتزانًا من أول زيارة حتى المتابعة.</p></div>
+        <div className="team-grid">
+          {teamExpertise.map((member, index) => <article className="team-card" key={member.title}><div className={`team-photo ${member.image}`} role="img" aria-label={`طبيب من فريق ${member.title}`}><span>0{index + 1}</span></div><div className="team-card-copy"><h3>{member.title}</h3><p>{member.description}</p><Link href="/booking">احجز مع التخصص <span>←</span></Link></div></article>)}
+        </div>
+        <div className="team-note"><span>✦</span><p>الصور تمثيلية للعرض البصري، وتُستبدل بصور وبيانات فريق العيادة عند اعتماد المشروع.</p></div>
+      </section>
+
       <section className="experience section" id="experience">
-        <div className="experience-copy"><div className="section-kicker"><span>03</span>رحلتك معنا</div><h2>من أول مكالمة<br />لحد ما <em>تبتسم بثقة.</em></h2><p>رحلة بسيطة ومفهومة، بدون مفاجآت. كل مرحلة لها هدف واضح، وأنت شريك في القرار من البداية.</p><Link className="button button-primary" href="/booking">احجز أول زيارة <span className="button-arrow">←</span></Link></div>
+        <div className="experience-copy"><div className="section-kicker"><span>04</span>رحلتك معنا</div><h2>من أول مكالمة<br />لحد ما <em>تبتسم بثقة.</em></h2><p>رحلة بسيطة ومفهومة، بدون مفاجآت. كل مرحلة لها هدف واضح، وأنت شريك في القرار من البداية.</p><Link className="button button-primary" href="/booking">احجز أول زيارة <span className="button-arrow">←</span></Link></div>
         <div className="journey-list">
           <article className="journey-step active"><span className="step-number">01</span><div><small>نسمعك</small><h3>استشارة هادئة</h3><p>نفهم ما يزعجك وما تتمنى تغييره، ونجيب عن كل أسئلتك.</p></div><span className="step-icon">↗</span></article>
           <article className="journey-step"><span className="step-number">02</span><div><small>نفهم الصورة كاملة</small><h3>فحص وتشخيص</h3><p>تقييم شامل يساعدنا على اختيار الطريق الأقصر والأكثر منطقية.</p></div><span className="step-icon">↗</span></article>
@@ -132,18 +147,17 @@ export default function Home() {
       <section className="promise-section"><div className="promise-card"><div className="promise-glow" /><div className="promise-copy"><span className="mini-label">THE DENTAL CARE PROMISE</span><h2>نشرح كل خطوة.<br />نحترم وقتك.<br /><em>ونصمم الرعاية حولك.</em></h2><p>لأن الثقة ليست شعارًا؛ هي الطريقة التي يجب أن تشعر بها من لحظة دخولك وحتى انتهاء رحلتك.</p></div><div className="promise-seal"><BrandMark light /><span>CARE<br />WITH<br />CLARITY</span></div></div></section>
 
       <section className="faq section" id="faq">
-        <div className="faq-intro"><div className="section-kicker"><span>04</span>أسئلة شائعة</div><h2>قبل ما تزورنا،<br /><em>خلّي الصورة أوضح.</em></h2><p>لو سؤالك مش موجود هنا، اختار موعد استشارة وسنساعدك في تحديد أول خطوة مناسبة.</p><Link href="/booking" className="inline-arrow">احجز استشارة <span>←</span></Link></div>
+        <div className="faq-intro"><div className="section-kicker"><span>05</span>أسئلة شائعة</div><h2>قبل ما تزورنا،<br /><em>خلّي الصورة أوضح.</em></h2><p>لو سؤالك مش موجود هنا، اختار موعد استشارة وسنساعدك في تحديد أول خطوة مناسبة.</p><Link href="/booking" className="inline-arrow">احجز استشارة <span>←</span></Link></div>
         <div className="faq-list">{faqs.map((item, index) => <details key={item.q} open={index === 0}><summary><span>{String(index + 1).padStart(2, "0")}</span>{item.q}<i>+</i></summary><p>{item.a}</p></details>)}</div>
       </section>
 
       <section className="booking section" id="book">
-        <div className="booking-panel booking-cta-panel">
-          <div className="booking-copy"><div className="section-kicker light"><span>05</span>الحجز الإلكتروني</div><h2>موعدك يبدأ<br /><em>من هنا.</em></h2><p>صفحة حجز مستقلة تساعدك تختار الخدمة واليوم والموعد المناسب، وتراجع كل التفاصيل قبل التأكيد.</p><Link className="button booking-main-button" href="/booking">افتح صفحة الحجز <span className="button-arrow">←</span></Link></div>
-          <div className="booking-steps" aria-label="خطوات الحجز">
-            <div className="booking-steps-head"><span>3 خطوات بسيطة</span><small>بدون مكالمات أو انتظار</small></div>
-            <article><b>01</b><div><h3>اختار الخدمة</h3><p>حدد سبب الزيارة أو ابدأ باستشارة عامة.</p></div><span>✓</span></article>
-            <article><b>02</b><div><h3>حدد اليوم والساعة</h3><p>شاهد المواعيد المتاحة واختار الأنسب لك.</p></div><span>✓</span></article>
-            <article><b>03</b><div><h3>راجع وأكد</h3><p>استلم رقم طلبك وتفاصيل الموعد فورًا.</p></div><span>✓</span></article>
+        <div className="contact-booking-grid">
+          <div className="contact-intro"><div className="section-kicker"><span>06</span>تواصل معنا</div><h2>خطوتك الأولى<br /><em>تبدأ من هنا.</em></h2><p>اختار الخدمة والموعد المناسب من الموقع، وسيظهر لك ملخص واضح بكل التفاصيل قبل إرسال الطلب.</p><div className="contact-points"><div><span>⌁</span><p><small>الحجز متاح</small><b>أونلاين في أي وقت</b></p></div><div><span>✓</span><p><small>بعد إرسال الطلب</small><b>يتواصل الفريق للتأكيد</b></p></div></div></div>
+          <div className="appointment-card">
+            <div className="appointment-card-top"><div><small>موعدك التجريبي</small><h3>العيادة الأقرب لابتسامتك</h3></div><span>↗</span></div>
+            <div className="appointment-map"><div className="map-route"><i /><i /><i /></div><span>اختار الخدمة</span><b>حدد اليوم</b><em>أكد الوقت</em></div>
+            <Link href="/booking">احجز موعدك الآن <span>←</span></Link>
           </div>
         </div>
       </section>
